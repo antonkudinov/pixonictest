@@ -4,12 +4,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
@@ -21,9 +16,9 @@ import java.util.concurrent.locks.ReentrantLock;
 @Slf4j
 public class PixonicExecutor {
 
-    public static final int DEFAULT_DELAY_SECONDS = 1;
-    public static final String PIXONIC_EXECUTOR_THREAD = "Pixonic Executor Thread";
-    public static final String PIXONIC_SCHEDULER_THREAD = "Pixonic Scheduler Thread";
+    private static final int DEFAULT_DELAY_SECONDS = 1;
+    private static final String PIXONIC_EXECUTOR_THREAD = "Pixonic Executor Thread";
+    private static final String PIXONIC_SCHEDULER_THREAD = "Pixonic Scheduler Thread";
 
     private PriorityBlockingQueue<PixonixEvent> pbq = new PriorityBlockingQueue<>();
     private ExecutorService executorThreadPool;
@@ -80,7 +75,7 @@ public class PixonicExecutor {
         );
     }
 
-    final static class PixonixThreadFactoryCreator {
+    private final static class PixonixThreadFactoryCreator {
         private final static ConcurrentHashMap<String, AtomicInteger> counter = new ConcurrentHashMap<>();
 
         static ThreadFactory getThreadFactory(String name) {
