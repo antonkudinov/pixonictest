@@ -44,7 +44,7 @@ public class PixonicExecutor {
                         PixonixEvent event = pbq.peek(); //take event without removing from Q
                         log.debug("Peek event {} from Q", event);
                         if (event != null) {
-                            log.debug("First check event {} for ready", event);
+                            log.debug("Initial check event {} for ready", event);
                             boolean initialEventReadyStatus = checkEventIsReady(event);
                             if (initialEventReadyStatus) {
                                 while (true) {

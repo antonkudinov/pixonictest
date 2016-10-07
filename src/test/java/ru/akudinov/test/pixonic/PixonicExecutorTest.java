@@ -1,5 +1,6 @@
 package ru.akudinov.test.pixonic;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,6 +18,7 @@ import static org.junit.Assert.*;
 /**
  * Created by akudinov on 06.10.16.
  */
+@Slf4j
 public class PixonicExecutorTest {
     private PixonicExecutor pixonicExecutor;
 
@@ -27,6 +29,7 @@ public class PixonicExecutorTest {
 
     @Test
     public void testSimpleExecute() throws InterruptedException {
+        log.info("testSimpleExecute");
         LocalDateTime dt = LocalDateTime.now();
         dt.plus(2, SECONDS);
         Callable<String> callable = () -> "OK";
@@ -39,12 +42,12 @@ public class PixonicExecutorTest {
 
     @Test
     public void testMultiplyExecute() throws InterruptedException {
-
+        log.info("testMultiplyExecute");
         final LocalDateTime dt = LocalDateTime.now();
         Callable<String> callable = () -> "OK";
 
         List<Callable<String>> tasks = new ArrayList<>();
-        for (int i = 0; i <= 100; i++) {
+        for (int i = 0; i <= 20; i++) {
             tasks.add(() -> {
                 PixonixEvent event = pixonicExecutor.execute(dt.plus((int)(Math.random() * 10), SECONDS), callable);
                 return String.valueOf(event.getId());
@@ -65,7 +68,7 @@ public class PixonicExecutorTest {
 
     @Test
     public void testScheduledExecute() throws InterruptedException {
-
+        log.info("testScheduledExecute");
         final LocalDateTime dt = LocalDateTime.now();
         Callable<String> callable = () -> "OK";
 
@@ -81,7 +84,7 @@ public class PixonicExecutorTest {
 
     @Test
     public void testOrderedExecute() throws InterruptedException {
-
+        log.info("testOrderedExecute");
         final LocalDateTime dt = LocalDateTime.now();
         Callable<String> callable = () -> "OK";
 
@@ -98,7 +101,7 @@ public class PixonicExecutorTest {
 
     @Test
     public void testOrderedExecuteForSameDateTime() throws InterruptedException {
-
+        log.info("testOrderedExecuteForSameDateTime");
         final LocalDateTime dt = LocalDateTime.now();
         Callable<String> callable = () -> "OK";
 
@@ -110,7 +113,7 @@ public class PixonicExecutorTest {
         waitForAllTasksExecuted();
 
         assertTrue("Event1 at same time with Event2", pe1.getDateTime().equals(pe2.getDateTime()));
-        assertTrue("Event executed in right order",
+        assertTrue("Event executed in right order [" + pe1 + " and " + pe2 + "]",
                 pe1.getId() < pe2.getId() &&
                         (pe1.getStartDateTime().isBefore(pe2.getStartDateTime()) ||
                         pe1.getStartDateTime().isEqual(pe2.getStartDateTime()))
