@@ -111,7 +111,9 @@ public class PixonicExecutorTest {
 
         assertTrue("Event1 at same time with Event2", pe1.getDateTime().equals(pe2.getDateTime()));
         assertTrue("Event executed in right order",
-                pe1.getId() < pe2.getId() && pe1.getStartDateTime().isBefore(pe2.getStartDateTime())
+                pe1.getId() < pe2.getId() &&
+                        (pe1.getStartDateTime().isBefore(pe2.getStartDateTime()) ||
+                        pe1.getStartDateTime().isEqual(pe2.getStartDateTime()))
         );
 
     }

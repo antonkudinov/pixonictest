@@ -24,6 +24,13 @@ public class PixonixEvent<T> implements Comparable<PixonixEvent>, Callable<T>{
 
     @java.beans.ConstructorProperties({"dateTime", "callable"})
     public PixonixEvent(LocalDateTime dateTime, Callable<T> callable) {
+        if (dateTime == null){
+            throw new IllegalArgumentException("Empty dateTime argument");
+        }
+        if (callable == null){
+            throw new IllegalArgumentException("Empty callable argument");
+        }
+
         this.dateTime = dateTime;
         this.callable = callable;
         this.id = counter.getAndIncrement();
