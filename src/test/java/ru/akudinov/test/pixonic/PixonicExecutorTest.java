@@ -80,6 +80,8 @@ public class PixonicExecutorTest {
         assertEquals("PBQ size", 0, pixonicExecutor.getState().getQueueSize().intValue());
         assertNotNull("StartDateTime event1 is not null", pe1.getStartDateTime());
         assertNotNull("StartDateTime event2 is not null", pe2.getStartDateTime());
+        assertNotNull("SubmitDateTime event1 is not null", pe1.getSubmitDateTime());
+        assertNotNull("SubmitDateTime event2 is not null", pe2.getSubmitDateTime());
     }
 
     @Test
@@ -96,7 +98,7 @@ public class PixonicExecutorTest {
         waitForAllTasksExecuted();
 
         assertTrue("Event1 earlier than  Event2", pe1.getDateTime().isBefore(pe2.getDateTime()));
-        assertTrue("Event executed in right order", pe1.getStartDateTime().isBefore(pe2.getStartDateTime()));
+        assertTrue("Event executed in right order", pe1.getSubmitDateTime().isBefore(pe2.getSubmitDateTime()));
     }
 
     @Test
@@ -115,8 +117,8 @@ public class PixonicExecutorTest {
         assertTrue("Event1 at same time with Event2", pe1.getDateTime().equals(pe2.getDateTime()));
         assertTrue("Event executed in right order [" + pe1 + " and " + pe2 + "]",
                 pe1.getId() < pe2.getId() &&
-                        (pe1.getStartDateTime().isBefore(pe2.getStartDateTime()) ||
-                        pe1.getStartDateTime().isEqual(pe2.getStartDateTime()))
+                        (pe1.getStartDateTime().isBefore(pe2.getSubmitDateTime()) ||
+                        pe1.getStartDateTime().isEqual(pe2.getSubmitDateTime()))
         );
 
     }
