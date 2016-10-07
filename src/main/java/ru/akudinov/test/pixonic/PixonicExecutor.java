@@ -48,8 +48,8 @@ public class PixonicExecutor {
                             boolean initialEventReadyStatus = checkEventIsReady(event);
                             if (initialEventReadyStatus) {
                                 while (true) {
-                                    log.debug("Poll event {} from Q at {} ", event, LocalDateTime.now());
                                     event = pbq.poll();  //take event with removing from Q
+                                    log.debug("Poll event {} from Q at {} ", event, LocalDateTime.now());
                                     log.debug("Check event {} for ready", event);
                                     if (initialEventReadyStatus || checkEventIsReady(event)) {
                                         log.debug("Execute event {} from Q", event);

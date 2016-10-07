@@ -121,6 +121,26 @@ public class PixonicExecutorTest {
 
     }
 
+    @Test
+    public void testArgsTesting(){
+        try {
+            pixonicExecutor.execute(null, null);
+            fail();
+        } catch (IllegalArgumentException E){
+            assertTrue(true);
+        }
+
+        try {
+            pixonicExecutor.execute(LocalDateTime.now(), null);
+            fail();
+        } catch (IllegalArgumentException E){
+            assertTrue(true);
+        }
+
+    }
+
+
+
     private void waitForAllTasksExecuted() throws InterruptedException {
         while (pixonicExecutor.getState().getQueueSize() != 0) {
             TimeUnit.SECONDS.sleep(1);
