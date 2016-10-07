@@ -1,5 +1,6 @@
 # pixonictest
-
+[![Build Status](https://travis-ci.org/antonkudinov/pixonictest.svg?branch=master)](https://travis-ci.org/antonkudinov/pixonictest)
+[![Coverage Status](https://coveralls.io/repos/github/antonkudinov/pixonictest/badge.svg?branch=master)](https://coveralls.io/github/antonkudinov/pixonictest?branch=master)
 
 
 # problem
