@@ -18,6 +18,7 @@ public class PixonixEvent<T> implements Comparable<PixonixEvent>, Callable<T>{
     private final static AtomicInteger counter = new AtomicInteger(1);
 
     private final LocalDateTime dateTime;
+    private LocalDateTime submitDateTime;
     private LocalDateTime startDateTime;
     private final Callable<T> callable;
     private final Integer id;

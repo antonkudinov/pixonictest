@@ -53,6 +53,7 @@ public class PixonicExecutor {
                                     log.debug("Check event {} for ready", event);
                                     if (initialEventReadyStatus || checkEventIsReady(event)) {
                                         log.debug("Execute event {} from Q", event);
+                                        event.setSubmitDateTime(LocalDateTime.now());
                                         executorThreadPool.submit(event);  // try to execute task
                                         initialEventReadyStatus = false;
                                     } else {  // not ready or empty event
